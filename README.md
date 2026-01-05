@@ -1,43 +1,17 @@
-# Astro Starter Kit: Minimal
+# based.health - Open Source Health Protocols and Product Directory
 
-```sh
-npm create astro@latest -- --template minimal
-```
+**based.health** is a community-managed, open-source registry of health protocols and products designed to improve human energy, longevity, and mental clarity.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+In an era of scattered podcast information, marketing-driven blogs, and hidden affiliate agendas, **based.health** serves as a single, immutable source of truth for evidence-based optimization. No ads. No fluff. Just the protocols.
 
-## 🚀 Project Structure
+[Browse the Protocols](https://based.health/protocols) • [Contribute](CONTRIBUTING.md) • [View License](LICENSE)
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🏛 The Philosophy
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Health information is currently fragmented and high-friction. We believe that human optimization standards should be:
+- **Open Source:** Owned by the community, not a corporation.
+- **Evidence-Based:** Every claim must be backed by a biological mechanism and clinical/expert reference.
+- **Minimalist:** Information is presented in a high-density, "Stupid Simple" format.
+- **Clean:** We enforce a strict "No Nasty Chemicals" standard for all listed products.
