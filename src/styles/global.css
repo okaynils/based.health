@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Arial, sans-serif;
+  --font-serif: Times, serif;
+  --border-width-1: 1px;
+}
+
+@layer base {
+  body {
+    @apply text-black font-sans antialiased m-0 p-0;
+  }
+
+  a {
+    @apply text-[#0000ee] hover:underline;
+  }
+
+  a:visited {
+    @apply text-[#551a8b];
+  }
+
+  * {
+    border-radius: 0px !important;
+  }
+}

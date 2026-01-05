@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import '../../styles/global.css';
+
+// 1. Generate a path for every protocol in your folder
+export async function getStaticPaths() {
+  const protocols = await getCollection('protocols');
+  return protocols.map(protocol => ({
+    params: { id: protocol.id },
+    props: { protocol },
+  }));
+}
+
+// 2. Get the data for the specific protocol being viewed
+const { protocol } = Astro.props;
+const { Content } = await render(protocol);
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{protocol.data.title}</title>
+</head>
+<body class="p-8 max-w-2xl mx-auto border-x-3 border-black min-h-screen">
+  <nav class="mb-8 border-b-3 border-black pb-4">
+    <a href="/" class="font-bold hover:bg-black hover:text-white p-1">← BACK_TO_INDEX</a>
+  </nav>
+
+  <header class="mb-8">
+    <p class="text-xs uppercase bg-black text-white inline-block px-2 py-1 mb-2">
+      Goal: {protocol.data.goal}
+    </p>
+    <h1 class="text-5xl font-black uppercase leading-tight">{protocol.data.title}</h1>
+  </header>
+
+  <article class="prose prose-neutral max-w-none">
+    <Content />
+  </article>
+
+  <footer class="mt-20 border-t-3 border-black pt-8 text-sm">
+    <p>This is an open source protocol.</p>
+    <a href="https://github.com/YOUR_USERNAME/YOUR_REPO" class="underline font-bold">
+      EDIT_THIS_PAGE_ON_GITHUB
+    </a>
+  </footer>
+</body>
+</html>

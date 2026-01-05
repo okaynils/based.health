@@ -1,16 +1,66 @@
 ---
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
 
+const allProtocols = await getCollection('protocols');
+
+// Group protocols by Goal to create the Craigslist "Category" look
+const categories = [...new Set(allProtocols.map(p => p.data.goal))];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>based.health</title>
+    </head>
+    <body class="flex justify-center">
+        <div class="w-full max-w-2xl bg-white min-h-screen">
+            
+            <header class="py-2 flex justify-between items-center">
+                <h1 class="text-xl font-bold">based.health</h1>
+                <nav class="text-sm">
+					<a href="/protocols" class="mr-2">protocols</a>
+                    <a href="/values" class="mr-2">values</a>
+					<a href="https://github.com/okaynils/based.health" target="_blank">github</a>
+                </nav>
+            </header>
+
+			<div>
+				<p>
+					based.health is an open source collection of health protocols, meals and products that improve energy, longevity, fitness and mental clarity. Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
+				</p>
+			</div>
+
+            <div class="p-1 text-sm text-center">
+                [ <a href="#">earth</a> > <a href="#">health_protocols</a> ]
+            </div>
+
+            <main class="p-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {categories.map(cat => (
+                        <div class="category">
+                            <h3 class="px-2 font-bold text-[#a64d79] mb-2 uppercase text-sm">
+                                {cat}
+                            </h3>
+                            <ul class="list-none p-0 m-0 space-y-1">
+                                {allProtocols.filter(p => p.data.goal === cat).map(p => (
+                                    <li class="text-sm">
+                                        <span class="text-gray-400 text-xs">jan 05</span>
+                                        <a href={`/protocols/${p.id}`} class="ml-1">
+                                            {p.data.title}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </main>
+
+            <footer class="mt-12 p-4 text-[10px] text-gray-600 text-center">
+                <p>based.health | <a href="#">values</a> | <a href="#">disclaimer</a></p>
+            </footer>
+        </div>
+    </body>
 </html>
