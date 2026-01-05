@@ -1,66 +1,41 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allProtocols = await getCollection('protocols');
-
-// Group protocols by Goal to create the Craigslist "Category" look
 const categories = [...new Set(allProtocols.map(p => p.data.goal))];
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>based.health</title>
-    </head>
-    <body class="flex justify-center">
-        <div class="w-full max-w-2xl bg-white min-h-screen">
-            
-            <header class="py-2 flex justify-between items-center">
-                <h1 class="text-xl font-bold">based.health</h1>
-                <nav class="text-sm">
-					<a href="/protocols" class="mr-2">protocols</a>
-                    <a href="/values" class="mr-2">values</a>
-					<a href="https://github.com/okaynils/based.health" target="_blank">github</a>
-                </nav>
-            </header>
+<BaseLayout title="based.health - Open Source Health Protocols">
+	<!-- What & Motivation -->
+	<div class="mt-4 px-4 py-1 bg-stone-100 border border-stone-200">
+		<p class="py-2">
+			<b>based.health</b> is an open-source collection of health protocols, meals, and products designed to improve energy, longevity, fitness, and mental clarity. Health information is scattered with numerous sources like the Huberman Lab podcast, Bryan Johnson's Blueprint, and specialized clinical research.
+		</p>
+		<p class="py-2">
+			The goal of this project is to bring these sources together into one community-managed directory, without any marketing or ads. Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
+		</p>
+	</div>
 
-			<div>
-				<p>
-					based.health is an open source collection of health protocols, meals and products that improve energy, longevity, fitness and mental clarity. Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
-				</p>
-			</div>
-
-            <div class="p-1 text-sm text-center">
-                [ <a href="#">earth</a> > <a href="#">health_protocols</a> ]
-            </div>
-
-            <main class="p-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    {categories.map(cat => (
-                        <div class="category">
-                            <h3 class="px-2 font-bold text-[#a64d79] mb-2 uppercase text-sm">
-                                {cat}
-                            </h3>
-                            <ul class="list-none p-0 m-0 space-y-1">
-                                {allProtocols.filter(p => p.data.goal === cat).map(p => (
-                                    <li class="text-sm">
-                                        <span class="text-gray-400 text-xs">jan 05</span>
-                                        <a href={`/protocols/${p.id}`} class="ml-1">
-                                            {p.data.title}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+    <main class="p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {categories.map(cat => (
+                <div class="category">
+                    <h3 class="font-bold text-[#a64d79] mb-2 uppercase text-sm">
+                        {cat}
+                    </h3>
+                    <ul class="list-none p-0 m-0 space-y-1">
+                        {allProtocols.filter(p => p.data.goal === cat).map(p => (
+                            <li class="text-sm">
+                                <span class="text-gray-400 text-xs italic">new</span>
+                                <a href={`/protocols/${p.id}`} class="ml-1">
+                                    {p.data.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            </main>
-
-            <footer class="mt-12 p-4 text-[10px] text-gray-600 text-center">
-                <p>based.health | <a href="#">values</a> | <a href="#">disclaimer</a></p>
-            </footer>
+            ))}
         </div>
-    </body>
-</html>
+    </main>
+</BaseLayout>
