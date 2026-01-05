@@ -13,29 +13,32 @@ const categories = [...new Set(allProtocols.map(p => p.data.goal))];
 			<b>based.health</b> is an open-source collection of health protocols, meals, and products designed to improve energy, longevity, fitness, and mental clarity. Health information is scattered with numerous sources like the Huberman Lab podcast, Bryan Johnson's Blueprint, and specialized clinical research.
 		</p>
 		<p class="py-2">
-			The goal of this project is to bring these sources together into one community-managed directory, without any marketing or ads. Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
+			The goal of this project is to bring these sources together into one community-managed directory, without any marketing or ads.
+		</p>
+		<p class="py-2">
+			Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
 		</p>
 	</div>
 
-    <main class="p-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <main class="py-4">
+		<h3 class="font-bold text-pink-800 uppercase text-sm">Protocols</h3>
+        <div class="gap-8 my-2">
             {categories.map(cat => (
                 <div class="category">
-                    <h3 class="font-bold text-[#a64d79] mb-2 uppercase text-sm">
-                        {cat}
-                    </h3>
-                    <ul class="list-none p-0 m-0 space-y-1">
+                    <ul>
                         {allProtocols.filter(p => p.data.goal === cat).map(p => (
-                            <li class="text-sm">
-                                <span class="text-gray-400 text-xs italic">new</span>
-                                <a href={`/protocols/${p.id}`} class="ml-1">
-                                    {p.data.title}
-                                </a>
-                            </li>
+                            <a href={`/protocols/${p.id}`} class="ml-1">
+								<li class="text-sm border-b border-dashed">
+									<span class="text-gray-400 text-xs italic">new</span>
+										{p.data.title}
+								</li>
+                            </a>
                         ))}
                     </ul>
                 </div>
             ))}
         </div>
+		<h3 class="font-bold text-sky-800 mb-2 uppercase text-sm">Products</h3>
+		<h3 class="font-bold text-green-800 mb-2 uppercase text-sm">Meals</h3>
     </main>
 </BaseLayout>
