@@ -11,25 +11,37 @@ const latestProtocols = allProtocols
 
 <BaseLayout title="based.health - Open Source Health Protocols">
     <div class="mt-4 px-4 py-1 bg-stone-100 border border-stone-200">
-        <p class="py-2">
+        <p class="py-2 text-sm leading-relaxed">
             <b>based.health</b> is an open-source collection of health protocols and products designed to improve energy, longevity, fitness, and mental clarity. Health information is scattered with numerous sources like the Huberman Lab podcast, Bryan Johnson's Blueprint, and specialized clinical research. The goal of this project is to bring these sources together into one community-managed directory, without any marketing or ads.
         </p>
-        <p class="py-2">
+        <p class="py-2 text-sm">
             Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
         </p>
     </div>
 
     <main class="py-4">
         <div class="mb-6">
-            <h3 class="font-bold text-pink-800 uppercase text-sm">Latest Protocols</h3>
+            <h3 class="font-bold text-pink-800 uppercase text-sm mb-2">Latest Protocols</h3>
             <ul class="list-none p-0 m-0">
                 {latestProtocols.map(p => (
-                    <li class="text-sm">
-                        <a href={`/protocols/${p.id}`} class="flex items-baseline py-1 no-underline group">
-                            <span class="text-gray-400 text-[10px] italic mr-2 shrink-0">
-                                {p.data.lastUpdated.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase()}
-                            </span>
-                            <span class="group-hover:underline">{p.data.title}</span>
+                    <li>
+                        <a href={`/protocols/${p.id}`} class="flex items-baseline justify-between py-1.5 no-underline group hover:bg-stone-50">
+                            <div class="flex items-baseline overflow-hidden">
+                                <span class="text-stone-400 text-[10px] tabular-nums mr-2 shrink-0 font-mono">
+                                    {p.data.lastUpdated.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase()}
+                                </span>
+                                <span class="text-sm text-[#0000ee] group-hover:underline truncate">
+                                    {p.data.title}
+                                </span>
+                            </div>
+
+                            <div class="flex gap-1 ml-4 shrink-0">
+                                {p.data.tags.slice(0, 3).map(tag => (
+                                    <span class="text-xs bg-stone-200 p-1 text-stone-600 lowercase">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
                         </a>
                     </li>
                 ))}
