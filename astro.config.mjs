@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://okaynils.github.io', 
-  base: 'based.health',
+  site: 'https://based.health', 
+  base: '/',
   vite: {
     plugins: [tailwindcss()],
   },
