@@ -8,12 +8,12 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
 ---
 
 <BaseLayout title="Protocols Directory - based.health">
-    <main>
-        <header class="mb-4">
-            <h2 class="text-3xl font-bold pb-2 mb-6">
+    <main class="py-4">
+        <header class="mb-3">
+            <h2 class="text-2xl font-bold leading-none mb-2">
                 Protocols Directory
             </h2>
-            <p class="text-sm text-stone-600 leading-relaxed mb-4">
+            <p class="text-xs text-stone-600 leading-relaxed mb-2">
                 Short implementation recipes with explicit risk, evidence, and contraindication notes.
             </p>
             
@@ -22,28 +22,28 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                     type="text" 
                     id="protocol-search" 
                     placeholder="Search by title, tag, or goal..." 
-                    class="w-full bg-stone-100 border border-stone-300 px-4 py-2 text-sm font-mono focus:outline-none focus:border-stone-800 focus:bg-white"
+                    class="w-full bg-stone-100 border border-stone-300 px-2.5 py-1.5 text-sm font-mono focus:outline-none focus:border-stone-800 focus:bg-white"
                 />
             </div>
         </header>
 
-        <div>
+        <div class="border-y border-stone-300">
             <table class="w-full text-left border-separate border-spacing-0" id="protocol-table">
                 <thead>
-                    <tr class="text-sm uppercase text-stone-400">
-                        <th class="font-bold pb-2">Name</th>
-                        <th class="font-bold pb-2 hidden md:table-cell">Evidence</th>
-                        <th class="font-bold pb-2 hidden md:table-cell">Risk</th>
-                        <th class="font-bold pb-2 text-right">Tags</th>
+                    <tr class="text-[11px] uppercase text-stone-600">
+                        <th class="font-bold px-1 py-1.5 border-b border-stone-300 bg-stone-100">Name</th>
+                        <th class="font-bold px-1 py-1.5 border-b border-stone-300 bg-stone-100 hidden md:table-cell">Evidence</th>
+                        <th class="font-bold px-1 py-1.5 border-b border-stone-300 bg-stone-100 hidden md:table-cell">Risk</th>
+                        <th class="font-bold px-1 py-1.5 border-b border-stone-300 bg-stone-100 text-right">Tags</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-200 bg-white">
                     {sortedProtocols.map(p => (
-                        <tr class="protocol-row group relative hover:bg-stone-50 cursor-pointer" 
+                        <tr class="protocol-row group relative hover:bg-[#ffffe8] cursor-pointer" 
                             data-title={p.data.title.toLowerCase()} 
                             data-summary={p.data.summary.toLowerCase()}
                             data-tags={p.data.tags.join(' ').toLowerCase()}>
-                            <td class="py-1.5">
+                            <td class="px-1 py-2">
                                 <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} 
                                    class="text-[#0000ee] group-hover:underline block font-medium after:absolute after:inset-0 after:z-10">
                                     {p.data.title}
@@ -52,21 +52,21 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                                     {p.data.summary}
                                 </p>
                             </td>
-                            <td class="py-1.5 text-stone-500 hidden md:table-cell">
-                                <span class="text-sm">{p.data.evidenceLevel}</span>
+                            <td class="px-1 py-2 text-stone-500 hidden md:table-cell">
+                                <span class="text-xs font-mono">{p.data.evidenceLevel}</span>
                             </td>
-                            <td class="py-1.5 text-stone-500 hidden md:table-cell">
-                                <span class="text-sm">{p.data.riskLevel}</span>
+                            <td class="px-1 py-2 text-stone-500 hidden md:table-cell">
+                                <span class="text-xs font-mono">{p.data.riskLevel}</span>
                             </td>
-                            <td class="py-1.5 text-right">
-                                <div class="flex gap-1.5 justify-end flex-wrap relative z-20">
+                            <td class="px-1 py-2 text-right">
+                                <div class="flex gap-1 justify-end flex-wrap relative z-20">
                                     {p.data.starterKit && (
-                                        <span class="text-sm bg-lime-50 border border-lime-200 px-2 py-0.5 text-lime-800 font-mono">
+                                        <span class="meta-chip bg-[#eaf5df] text-lime-800">
                                             starter
                                         </span>
                                     )}
                                     {p.data.tags.map(tag => (
-                                        <span class="text-sm bg-stone-100 px-2 py-0.5 text-stone-500 font-mono">
+                                        <span class="meta-chip">
                                             {tag}
                                         </span>
                                     ))}
@@ -77,7 +77,7 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                 </tbody>
             </table>
             
-            <div id="no-results" class="hidden p-12 text-center text-stone-400 italic text-sm border-t border-stone-200">
+            <div id="no-results" class="hidden p-12 text-center text-stone-400 italic text-sm border-t border-stone-300">
                 No matching protocols found.
             </div>
         </div>

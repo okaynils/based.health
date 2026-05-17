@@ -1,17 +1,22 @@
-<header class="py-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">
+<header class="py-3 border-b border-stone-300">
+    <div class="flex justify-between items-center gap-3">
         <a href="/" class="flex items-center gap-2 no-underline text-black">
             <img 
                 src="/logo.png" 
                 alt="based.health logo" 
                 class="w-6 h-6 block"
             />
-            <h1 class="text-xl font-bold m-0 leading-none">based.health</h1>
+            <div>
+                <h1 class="text-2xl font-bold m-0 leading-none">based.health</h1>
+                <p class="text-[11px] text-stone-500 leading-none mt-1">open health protocols</p>
+            </div>
         </a>
-    </h1>
-    <nav class="text-sm">
-        <a href="/protocols" class="mr-2">protocols</a>
-        <a href="/values" class="mr-2">values</a>
-        <a href="https://github.com/okaynils/based.health" target="_blank">github</a>
-    </nav>
+        <nav class="text-sm leading-tight text-right">
+            <a href="/protocols">protocols</a>
+            <span class="text-stone-400 mx-1">/</span>
+            <a href="/values">values</a>
+            <span class="text-stone-400 mx-1">/</span>
+            <a href="https://github.com/okaynils/based.health" target="_blank">github</a>
+        </nav>
+    </div>
 </header>

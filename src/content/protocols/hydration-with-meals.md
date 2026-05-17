@@ -11,7 +11,7 @@ impact: "medium"
 evidenceLevel: "moderate"
 riskLevel: "low"
 starterKit: true
-starterRank: 9
+starterRank: 5
 contraindications: ["Heart failure, kidney disease, hyponatremia risk, and fluid restriction plans require clinician guidance.", "Endurance athletes and heavy sweaters may need electrolytes, not just water."]
 ---
 

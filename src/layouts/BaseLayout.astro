@@ -14,12 +14,9 @@ const { title = "based.health" } = Astro.props;
         <title>{title}</title>
         
         <link rel="icon" type="image/x-icon" href="/favicon.ico?v=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@700;900&display=swap" rel="stylesheet">
     </head>
-    <body class="flex justify-center">
-        <div class="w-full max-w-xl bg-white min-h-screen font-sans">
+    <body>
+        <div class="site-shell">
             <Header />
             <slot />
             <Footer />

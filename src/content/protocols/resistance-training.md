@@ -10,8 +10,7 @@ frequency: "2x/week"
 impact: "high"
 evidenceLevel: "strong"
 riskLevel: "low"
-starterKit: true
-starterRank: 7
+starterKit: false
 contraindications: ["Get medical guidance after recent surgery, unexplained chest pain, unstable cardiovascular disease, or acute injury.", "Start lighter than your ego wants."]
 ---
 

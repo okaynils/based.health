@@ -10,8 +10,7 @@ frequency: "nightly"
 impact: "medium"
 evidenceLevel: "moderate"
 riskLevel: "low"
-starterKit: true
-starterRank: 8
+starterKit: false
 contraindications: ["Prioritize safety lighting for stairs, driving, cooking, caregiving, and night work.", "Shift workers may need a different light plan."]
 ---
 

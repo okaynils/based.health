@@ -8,78 +8,44 @@ const starterProtocols = allProtocols
     .filter((protocol) => protocol.data.starterKit)
     .sort((a, b) => (a.data.starterRank ?? 999) - (b.data.starterRank ?? 999));
 
-const latestProtocols = [...allProtocols]
-    .sort((a, b) => b.data.lastUpdated.valueOf() - a.data.lastUpdated.valueOf())
+const randomPicks = [...allProtocols]
+    .filter((protocol) => !protocol.data.starterKit)
+    .sort((a, b) => a.id.localeCompare(b.id))
     .slice(0, 5);
 ---
 
 <BaseLayout title="based.health - Open Source Health Protocols">
-    <div class="mt-4 px-4 py-1 bg-stone-100 border border-stone-200">
-        <p class="py-2 text-sm leading-relaxed">
-            <b>based.health</b> is an open-source archive of simple health protocols. Start with low-risk defaults, implement fast, then read the evidence and caveats when you need more context.
-        </p>
-        <p class="py-2 text-sm">
-            Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
-        </p>
-    </div>
-
     <main class="py-4">
-        <section class="mb-8">
-            <div class="mb-3">
-                <h2 class="text-3xl font-bold text-stone-900">Starter Kit</h2>
-                <p class="text-sm text-stone-600 leading-relaxed mt-1">
-                    The fastest protocols to implement today. Low-cost, low-risk, and useful before anything more advanced.
+        <section class="border border-stone-300 bg-[#ffffe8] p-3 mb-6">
+            <h2 class="text-3xl font-bold text-stone-900 leading-none">Health protocols you can actually do.</h2>
+            <p class="text-sm leading-relaxed mt-2 max-w-3xl">
+                based.health is an open-source archive of simple health protocols. It is for people who want the steps first, the caveats visible, and the evidence one click away.
+            </p>
+            <p class="text-sm mt-2">
+                Browse <a href="/protocols">all protocols</a> or contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>.
+            </p>
+        </section>
+
+        <section class="mb-5 border border-stone-300 bg-stone-100">
+            <div class="px-2 py-1 border-b border-stone-300">
+                <h2 class="text-base font-bold text-stone-900 leading-tight">Starter Kit</h2>
+                <p class="text-xs text-stone-600">
+                    Five low-hurdle defaults for beginners. Start here.
                 </p>
             </div>
 
-            <ul class="list-none p-0 m-0">
+            <ul class="list-none p-0 m-0 bg-white">
                 {starterProtocols.map((p) => (
-                    <li class="border-t border-stone-200 last:border-b">
-                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="block py-3 no-underline group hover:bg-stone-50">
-                            <div class="flex items-baseline justify-between gap-3">
-                                <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
+                    <li class="border-t border-stone-200 first:border-t-0">
+                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="grid grid-cols-1 sm:grid-cols-[minmax(8rem,auto)_1fr_auto] items-baseline gap-x-2 gap-y-0.5 px-2 py-1.5 no-underline group hover:bg-[#ffffe8]">
+                            <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
                                     {p.data.title}
-                                </span>
-                                <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
-                                    {p.data.timeCommitment}
-                                </span>
-                            </div>
-                            <p class="text-sm text-stone-700 leading-relaxed mt-1">
+                            </span>
+                            <span class="text-xs text-stone-600 leading-snug">
                                 {p.data.summary}
-                            </p>
-                            <div class="flex gap-1.5 flex-wrap mt-2">
-                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
-                                    {p.data.impact} impact
-                                </span>
-                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
-                                    {p.data.evidenceLevel} evidence
-                                </span>
-                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
-                                    {p.data.riskLevel} risk
-                                </span>
-                                {p.data.tags.slice(0, 2).map((tag) => (
-                                    <span class="text-[10px] bg-white border border-stone-200 px-1.5 py-0.5 font-mono text-stone-500">
-                                        #{tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </section>
-
-        <section class="mb-8">
-            <h3 class="font-bold text-pink-800 uppercase text-sm mb-2">Recently Verified</h3>
-            <ul class="list-none p-0 m-0">
-                {latestProtocols.map((p) => (
-                    <li>
-                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="flex items-baseline justify-between py-1.5 no-underline group hover:bg-stone-50">
-                            <span class="text-sm text-[#0000ee] group-hover:underline truncate">
-                                {p.data.title}
                             </span>
-                            <span class="text-stone-400 text-[10px] tabular-nums ml-4 shrink-0 font-mono">
-                                {p.data.lastUpdated.toISOString().split('T')[0]}
+                            <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
+                                {p.data.timeCommitment}
                             </span>
                         </a>
                     </li>
@@ -87,9 +53,38 @@ const latestProtocols = [...allProtocols]
             </ul>
         </section>
 
-        <section>
-            <h3 class="font-bold text-sky-800 mb-2 uppercase text-sm">Latest Products</h3>
-            <p class="text-xs text-stone-400 italic">Coming later, after the protocol archive has a stronger review standard.</p>
+        <section class="mb-4">
+            <h3 class="text-base font-bold text-stone-900 mb-1">Random Picks</h3>
+            <ul class="list-none p-0 m-0 border-t border-stone-300">
+                {randomPicks.map((p) => (
+                    <li class="border-b border-stone-200">
+                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="flex items-baseline justify-between px-1 py-1.5 no-underline group hover:bg-[#ffffe8]">
+                            <span class="text-sm min-w-0">
+                                <span class="text-[#0000ee] group-hover:underline">{p.data.title}</span>
+                                <span class="text-xs text-stone-500 ml-2">{p.data.summary}</span>
+                            </span>
+                            <span class="text-stone-400 text-[10px] uppercase ml-4 shrink-0 font-mono">
+                                {p.data.tags[0]}
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+            <p class="text-xs text-stone-600 mt-2 px-1">
+                See the full searchable directory: <a href="/protocols">all protocols</a>.
+            </p>
+        </section>
+
+        <section class="mt-6 border-t border-stone-300 pt-3">
+            <h3 class="text-base font-bold text-stone-900 mb-1">Long-term vision</h3>
+            <p class="text-sm leading-relaxed max-w-3xl">
+                A public handbook for health protocols: simple steps, visible caveats, clear evidence, no ads, no affiliate pressure, and no long articles required before someone can act.
+            </p>
+            <ul class="list-disc ml-5 mt-2 text-sm leading-relaxed text-stone-700">
+                <li>Make common health defaults easy to find and implement.</li>
+                <li>Keep every claim tied to evidence, uncertainty, and contraindications.</li>
+                <li>Let contributors improve protocols in public instead of burying updates in content feeds.</li>
+            </ul>
         </section>
     </main>
 </BaseLayout>

@@ -10,8 +10,7 @@ frequency: "daily"
 impact: "high"
 evidenceLevel: "strong"
 riskLevel: "low"
-starterKit: true
-starterRank: 5
+starterKit: false
 contraindications: ["Increase gradually if you are sedentary, injured, pregnant, or managing chronic illness.", "Stop and seek care for chest pain, fainting, or severe shortness of breath."]
 ---
 

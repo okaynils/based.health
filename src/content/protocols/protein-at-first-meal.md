@@ -10,8 +10,7 @@ frequency: "daily"
 impact: "medium"
 evidenceLevel: "moderate"
 riskLevel: "low"
-starterKit: true
-starterRank: 6
+starterKit: false
 contraindications: ["Kidney disease, liver disease, eating disorders, and medically prescribed diets require clinician guidance.", "Food allergies and intolerances determine protein source choice."]
 ---
 

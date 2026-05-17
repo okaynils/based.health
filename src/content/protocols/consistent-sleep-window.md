@@ -10,8 +10,7 @@ frequency: "nightly"
 impact: "high"
 evidenceLevel: "strong"
 riskLevel: "low"
-starterKit: true
-starterRank: 10
+starterKit: false
 contraindications: ["Insomnia, sleep apnea symptoms, bipolar disorder, and shift work need individualized guidance.", "Do not stay in bed awake for long periods if you are treating insomnia with CBT-I principles."]
 ---
 
