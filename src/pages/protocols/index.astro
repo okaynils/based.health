@@ -48,7 +48,7 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                                    class="text-[#0000ee] group-hover:underline block font-medium after:absolute after:inset-0 after:z-10">
                                     {p.data.title}
                                 </a>
-                                <p class="text-xs text-stone-500 leading-snug max-w-[28rem] pr-4">
+                                <p class="protocol-summary text-xs text-stone-500 leading-snug max-w-[28rem] pr-4">
                                     {p.data.summary}
                                 </p>
                             </td>
@@ -81,6 +81,14 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                 No matching protocols found.
             </div>
         </div>
+
+        <a
+            href="https://github.com/okaynils/based.health"
+            target="_blank"
+            class="block mt-3 border border-dashed border-stone-400 px-2 py-2 text-sm font-semibold text-[#0000ee] no-underline hover:bg-[#ffffe8] hover:underline"
+        >
+            Contribute a new protocol here!
+        </a>
     </main>
 </BaseLayout>
 

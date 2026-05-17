@@ -16,8 +16,8 @@ const randomPicks = [...allProtocols]
 
 <BaseLayout title="based.health - Open Source Health Protocols">
     <main class="py-4">
-        <section class="border border-stone-300 bg-[#ffffe8] p-3 mb-6">
-            <h2 class="text-3xl font-bold text-stone-900 leading-none">Health protocols you can actually do.</h2>
+        <section class="border border-stone-300 bg-[#ffffe8] p-3 mb-5">
+            <h2 class="text-3xl font-bold text-stone-900 leading-none">Health protocols for everyone.</h2>
             <p class="text-sm leading-relaxed mt-2 max-w-3xl">
                 based.health is an open-source archive of simple health protocols. It is for people who want the steps first, the caveats visible, and the evidence one click away.
             </p>
@@ -26,65 +26,88 @@ const randomPicks = [...allProtocols]
             </p>
         </section>
 
-        <section class="mb-5 border border-stone-300 bg-stone-100">
-            <div class="px-2 py-1 border-b border-stone-300">
-                <h2 class="text-base font-bold text-stone-900 leading-tight">Starter Kit</h2>
-                <p class="text-xs text-stone-600">
-                    Five low-hurdle defaults for beginners. Start here.
-                </p>
-            </div>
+        <div class="grid gap-5 lg:grid-cols-[minmax(22rem,0.86fr)_minmax(0,1fr)] lg:items-start">
+            <section class="border border-stone-300 bg-stone-100">
+                <div class="px-3 py-2">
+                    <h2 class="text-base font-bold text-stone-900 leading-tight">Starter Kit</h2>
+                    <p class="text-xs text-stone-600">
+                        Five low-hurdle defaults for beginners. Start here.
+                    </p>
+                </div>
 
-            <ul class="list-none p-0 m-0 bg-white">
-                {starterProtocols.map((p) => (
-                    <li class="border-t border-stone-200 first:border-t-0">
-                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="grid grid-cols-1 sm:grid-cols-[minmax(8rem,auto)_1fr_auto] items-baseline gap-x-2 gap-y-0.5 px-2 py-1.5 no-underline group hover:bg-[#ffffe8]">
-                            <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
+                <ul class="list-none py-1 mb-1 mx-1">
+                    {starterProtocols.map((p) => (
+                        <li>
+                            <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="grid grid-cols-1 sm:grid-cols-[minmax(8rem,auto)_1fr_auto] items-baseline gap-x-2 gap-y-0.5 px-2 py-1.5 no-underline group hover:bg-[#ffffe8]">
+                                <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
                                     {p.data.title}
-                            </span>
-                            <span class="text-xs text-stone-600 leading-snug">
-                                {p.data.summary}
-                            </span>
-                            <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
-                                {p.data.timeCommitment}
-                            </span>
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </section>
+                                </span>
+                                <span class="protocol-summary text-xs text-stone-600 leading-snug">
+                                    {p.data.summary}
+                                </span>
+                                <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
+                                    {p.data.timeCommitment}
+                                </span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
 
-        <section class="mb-4">
-            <h3 class="text-base font-bold text-stone-900 mb-1">Random Picks</h3>
-            <ul class="list-none p-0 m-0 border-t border-stone-300">
-                {randomPicks.map((p) => (
-                    <li class="border-b border-stone-200">
-                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="flex items-baseline justify-between px-1 py-1.5 no-underline group hover:bg-[#ffffe8]">
-                            <span class="text-sm min-w-0">
-                                <span class="text-[#0000ee] group-hover:underline">{p.data.title}</span>
-                                <span class="text-xs text-stone-500 ml-2">{p.data.summary}</span>
-                            </span>
-                            <span class="text-stone-400 text-[10px] uppercase ml-4 shrink-0 font-mono">
-                                {p.data.tags[0]}
-                            </span>
-                        </a>
-                    </li>
-                ))}
-            </ul>
-            <p class="text-xs text-stone-600 mt-2 px-1">
-                See the full searchable directory: <a href="/protocols">all protocols</a>.
-            </p>
-        </section>
+            <section>
+                <h3 class="text-base font-bold text-stone-900 mb-1">Random Picks</h3>
+                <ul class="list-none p-0 m-0">
+                    {randomPicks.map((p) => (
+                        <li>
+                            <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="grid grid-cols-1 sm:grid-cols-[minmax(8rem,auto)_1fr_auto] items-baseline gap-x-2 gap-y-0.5 px-0 py-1.5 no-underline group hover:bg-[#ffffe8]">
+                                <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
+                                    {p.data.title}
+                                </span>
+                                <span class="protocol-summary text-xs text-stone-600 leading-snug">
+                                    {p.data.summary}
+                                </span>
+                                <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
+                                    {p.data.tags[0]}
+                                </span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <a
+                    href="https://github.com/okaynils/based.health"
+                    target="_blank"
+                    class="block mt-2 border border-dashed border-stone-400 px-2 py-2 text-sm text-stone-400 no-underline hover:bg-[#ffffe8] hover:underline"
+                >
+                    Contribute a new protocol here!
+                </a>
+                <p class="text-xs text-stone-600 mt-2 px-1">
+                    See the full searchable directory: <a href="/protocols">all protocols</a>.
+                </p>
+            </section>
+        </div>
 
-        <section class="mt-6 border-t border-stone-300 pt-3">
-            <h3 class="text-base font-bold text-stone-900 mb-1">Long-term vision</h3>
-            <p class="text-sm leading-relaxed max-w-3xl">
-                A public handbook for health protocols: simple steps, visible caveats, clear evidence, no ads, no affiliate pressure, and no long articles required before someone can act.
-            </p>
-            <ul class="list-disc ml-5 mt-2 text-sm leading-relaxed text-stone-700">
-                <li>Make common health defaults easy to find and implement.</li>
-                <li>Keep every claim tied to evidence, uncertainty, and contraindications.</li>
-                <li>Let contributors improve protocols in public instead of burying updates in content feeds.</li>
-            </ul>
-        </section>
+        <div class="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.42fr)] lg:items-start">
+            <section class="border-t border-stone-300 pt-3">
+                <h3 class="text-base font-bold text-stone-900 mb-1">Long-term vision</h3>
+                <p class="text-sm leading-relaxed max-w-3xl">
+                    A public handbook for health protocols: simple steps, visible caveats, clear evidence, no ads, no affiliate pressure, and no long articles required before someone can act.
+                </p>
+                <ul class="list-disc ml-5 mt-2 text-sm leading-relaxed text-stone-700">
+                    <li>Make common health defaults easy to find and implement.</li>
+                    <li>Keep every claim tied to evidence, uncertainty, and contraindications.</li>
+                    <li>Let contributors improve protocols in public instead of burying updates in content feeds.</li>
+                </ul>
+            </section>
+
+            <section class="border-t border-stone-300 pt-3">
+                <h3 class="text-base font-bold text-stone-900 mb-1">Directory</h3>
+                <p class="text-sm leading-relaxed">
+                    Search by protocol, goal, tag, evidence level, and risk note.
+                </p>
+                <p class="text-sm mt-2">
+                    <a href="/protocols">Open all protocols</a>
+                </p>
+            </section>
+        </div>
     </main>
 </BaseLayout>
