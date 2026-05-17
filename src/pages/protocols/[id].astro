@@ -5,7 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 export async function getStaticPaths() {
     const protocols = await getCollection("protocols");
     return protocols.map((protocol) => ({
-        params: { id: protocol.id },
+        params: { id: protocol.id.replace(/\.md$/, "") },
         props: { protocol },
     }));
 }
@@ -20,14 +20,17 @@ const { Content } = await render(protocol);
             <h2 class="text-3xl font-bold text-stone-900">
                 {protocol.data.title}
             </h2>
+            <p class="text-sm text-stone-600 leading-relaxed mt-2">
+                {protocol.data.summary}
+            </p>
         </header>
 
-        <section class="mb-10">
+        <section class="mb-8">
             <table class="w-full text-[10px] border border-stone-200 border-collapse ">
                 <thead>
                     <tr>
                         <th colspan="2" class="bg-stone-100 p-2 text-left border-b border-stone-300 font-bold uppercase tracking-tight text-[10px] text-stone-700">
-                            Protocol Specifications
+                            Protocol Snapshot
                         </th>
                     </tr>
                 </thead>
@@ -41,8 +44,34 @@ const { Content } = await render(protocol);
                         <td class="p-2 text-stone-800">{protocol.data.cost}</td>
                     </tr>
                     <tr>
-                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Time Commitment</td>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Time</td>
                         <td class="p-2 text-stone-800">{protocol.data.timeCommitment}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Frequency</td>
+                        <td class="p-2 text-stone-800">{protocol.data.frequency}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Impact</td>
+                        <td class="p-2 capitalize text-stone-800">{protocol.data.impact}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Evidence</td>
+                        <td class="p-2 capitalize text-stone-800">{protocol.data.evidenceLevel}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Risk</td>
+                        <td class="p-2 capitalize text-stone-800">{protocol.data.riskLevel}</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Modify/Avoid</td>
+                        <td class="p-2 text-stone-800">
+                            <ul class="list-disc ml-4 space-y-1">
+                                {protocol.data.contraindications.map((item) => (
+                                    <li>{item}</li>
+                                ))}
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td class="p-2 font-bold bg-stone-100 border-r border-stone-300 text-[10px] uppercase text-stone-600">Tags</td>
@@ -65,6 +94,10 @@ const { Content } = await render(protocol);
         <article class="prose-container max-w-none">
             <Content />
         </article>
+
+        <aside class="mt-8 border border-stone-200 bg-stone-50 p-3 text-xs leading-relaxed text-stone-600">
+            This is a general education protocol, not personal medical advice. Stop if symptoms feel unsafe, and use qualified medical guidance for diagnosed conditions, medications, pregnancy, or high-risk situations.
+        </aside>
     </main>
 </BaseLayout>
 

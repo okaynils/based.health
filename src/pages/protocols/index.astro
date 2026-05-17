@@ -13,6 +13,9 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
             <h2 class="text-3xl font-bold pb-2 mb-6">
                 Protocols Directory
             </h2>
+            <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                Short implementation recipes with explicit risk, evidence, and contraindication notes.
+            </p>
             
             <div class="relative group">
                 <input 
@@ -29,7 +32,8 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                 <thead>
                     <tr class="text-sm uppercase text-stone-400">
                         <th class="font-bold pb-2">Name</th>
-                        <th class="font-bold pb-2 hidden md:table-cell">Difficulty</th>
+                        <th class="font-bold pb-2 hidden md:table-cell">Evidence</th>
+                        <th class="font-bold pb-2 hidden md:table-cell">Risk</th>
                         <th class="font-bold pb-2 text-right">Tags</th>
                     </tr>
                 </thead>
@@ -37,18 +41,30 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
                     {sortedProtocols.map(p => (
                         <tr class="protocol-row group relative hover:bg-stone-50 cursor-pointer" 
                             data-title={p.data.title.toLowerCase()} 
+                            data-summary={p.data.summary.toLowerCase()}
                             data-tags={p.data.tags.join(' ').toLowerCase()}>
                             <td class="py-1.5">
-                                <a href={`/protocols/${p.id}`} 
+                                <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} 
                                    class="text-[#0000ee] group-hover:underline block font-medium after:absolute after:inset-0 after:z-10">
                                     {p.data.title}
                                 </a>
+                                <p class="text-xs text-stone-500 leading-snug max-w-[28rem] pr-4">
+                                    {p.data.summary}
+                                </p>
                             </td>
                             <td class="py-1.5 text-stone-500 hidden md:table-cell">
-                                <span class="text-sm">{p.data.difficulty}</span>
+                                <span class="text-sm">{p.data.evidenceLevel}</span>
+                            </td>
+                            <td class="py-1.5 text-stone-500 hidden md:table-cell">
+                                <span class="text-sm">{p.data.riskLevel}</span>
                             </td>
                             <td class="py-1.5 text-right">
                                 <div class="flex gap-1.5 justify-end flex-wrap relative z-20">
+                                    {p.data.starterKit && (
+                                        <span class="text-sm bg-lime-50 border border-lime-200 px-2 py-0.5 text-lime-800 font-mono">
+                                            starter
+                                        </span>
+                                    )}
                                     {p.data.tags.map(tag => (
                                         <span class="text-sm bg-stone-100 px-2 py-0.5 text-stone-500 font-mono">
                                             {tag}
@@ -79,9 +95,10 @@ const sortedProtocols = allProtocols.sort((a, b) => a.data.title.localeCompare(b
 
         rows.forEach(row => {
             const title = row.getAttribute('data-title') || '';
+            const summary = row.getAttribute('data-summary') || '';
             const tags = row.getAttribute('data-tags') || '';
             
-            if (title.includes(query) || tags.includes(query)) {
+            if (title.includes(query) || summary.includes(query) || tags.includes(query)) {
                 (row as HTMLElement).style.display = '';
                 hasMatches = true;
             } else {

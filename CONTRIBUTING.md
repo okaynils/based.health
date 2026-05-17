@@ -1,40 +1,50 @@
 # Contributing to based.health
 
-First off, thank you for being here. **based.health** only works because people like you are willing to research, verify, and share protocols.
+based.health accepts concise, evidence-aware health protocols. The bar is higher than a blog post because bad health advice can hurt people.
 
-This project is not a blog; it is a **registry**. Every contribution must be rigorous, evidence-based, and free of marketing hype.
+## What Belongs
 
----
+Good first protocols are low-risk lifestyle defaults:
+- sleep timing
+- light exposure
+- walking and movement
+- basic resistance training
+- simple nutrition defaults
+- hydration
 
-## 🛡 The Core Values
+Avoid supplements, medications, disease treatment, extreme diets, hormone protocols, and high-risk interventions unless the project has an explicit review process for them.
 
-Before you submit anything, ask yourself:
-1. **Is it clean?** Products must be free of endocrine disruptors (BPA/BPS, Phthalates, PFAS, Fragrance).
-2. **Is it based in science?** No "bio-hacking" fluff. If there isn't a study or a clear biological mechanism, it doesn't belong here.
-3. **Is it simple?** Can a regular person understand and execute this in under 5 minutes of reading?
+## Protocol Requirements
 
----
+Each protocol must include:
+- a short implementation summary
+- clear steps someone can do today
+- time, cost, frequency, difficulty, impact, evidence level, and risk level
+- contraindications or modification notes
+- credible references for meaningful claims
 
-## 🛠 How to Contribute
+Use plain language. Do not bury the action steps under background theory.
 
-### 1. Adding or Editing a Protocol
-Protocols are located in `src/content/protocols/`. 
+## Evidence Levels
 
-To add a new one:
-1. **Fork** the repository.
-2. Create a new `.md` file in that folder (e.g., `this-super-based-protocol.md`).
-3. Follow the **Standard Protocol Template** (see below).
-4. Submit a **Pull Request**.
+- `strong`: public health guideline, consensus statement, systematic review, or multiple consistent controlled studies
+- `moderate`: plausible mechanism plus some human evidence, but limited dose or outcome certainty
+- `emerging`: early evidence or expert-informed practice with meaningful uncertainty
 
-### 2. The Standard Protocol Template
-All protocols must use this exact frontmatter structure:
+## Safety Rules
 
-```markdown
----
-title: "Name of the Protocol"
-lastUpdated: 2026-01-05
-tags: ["energy", "sleep"]
-difficulty: "easy" | "medium" | "hard"
-cost: "free" | "$" | "$$" | "$$$"
-timeCommitment: "e.g. 10 mins/day"
----
+- Keep claims narrow.
+- Do not imply diagnosis, treatment, or guaranteed outcomes.
+- Add contraindications for medical conditions, medications, pregnancy, injury, and obvious risk groups.
+- Prefer "modify or avoid" over pretending a protocol is universal.
+- If a protocol can cause severe downside without supervision, it does not belong in the starter kit.
+
+## Before Opening a PR
+
+Run:
+
+```sh
+npm run build
+```
+
+Then check that the protocol page is short, scannable, and cites its evidence.

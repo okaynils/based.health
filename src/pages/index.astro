@@ -4,15 +4,19 @@ import { getCollection } from 'astro:content';
 
 const allProtocols = await getCollection('protocols');
 
-const latestProtocols = allProtocols
+const starterProtocols = allProtocols
+    .filter((protocol) => protocol.data.starterKit)
+    .sort((a, b) => (a.data.starterRank ?? 999) - (b.data.starterRank ?? 999));
+
+const latestProtocols = [...allProtocols]
     .sort((a, b) => b.data.lastUpdated.valueOf() - a.data.lastUpdated.valueOf())
-    .slice(0, 10);
+    .slice(0, 5);
 ---
 
 <BaseLayout title="based.health - Open Source Health Protocols">
     <div class="mt-4 px-4 py-1 bg-stone-100 border border-stone-200">
         <p class="py-2 text-sm leading-relaxed">
-            <b>based.health</b> is an open-source collection of health protocols and products designed to improve energy, longevity, fitness, and mental clarity. Health information is scattered with numerous sources like the Huberman Lab podcast, Bryan Johnson's Blueprint, and specialized clinical research. The goal of this project is to bring these sources together into one community-managed directory, without any marketing or ads.
+            <b>based.health</b> is an open-source archive of simple health protocols. Start with low-risk defaults, implement fast, then read the evidence and caveats when you need more context.
         </p>
         <p class="py-2 text-sm">
             Contribute on <a href="https://github.com/okaynils/based.health" target="_blank">github</a>!
@@ -20,25 +24,42 @@ const latestProtocols = allProtocols
     </div>
 
     <main class="py-4">
-        <div class="mb-6">
-            <h3 class="font-bold text-pink-800 uppercase text-sm mb-2">Latest Protocols</h3>
+        <section class="mb-8">
+            <div class="mb-3">
+                <h2 class="text-3xl font-bold text-stone-900">Starter Kit</h2>
+                <p class="text-sm text-stone-600 leading-relaxed mt-1">
+                    The fastest protocols to implement today. Low-cost, low-risk, and useful before anything more advanced.
+                </p>
+            </div>
+
             <ul class="list-none p-0 m-0">
-                {latestProtocols.map(p => (
-                    <li>
-                        <a href={`/protocols/${p.id}`} class="flex items-baseline justify-between py-1.5 no-underline group hover:bg-stone-50">
-                            <div class="flex items-baseline overflow-hidden">
-                                <span class="text-stone-400 text-[10px] tabular-nums mr-2 shrink-0 font-mono">
-                                    {p.data.lastUpdated.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase()}
-                                </span>
-                                <span class="text-sm text-[#0000ee] group-hover:underline truncate">
+                {starterProtocols.map((p) => (
+                    <li class="border-t border-stone-200 last:border-b">
+                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="block py-3 no-underline group hover:bg-stone-50">
+                            <div class="flex items-baseline justify-between gap-3">
+                                <span class="text-sm text-[#0000ee] group-hover:underline font-semibold">
                                     {p.data.title}
                                 </span>
+                                <span class="text-[10px] uppercase font-mono text-stone-500 shrink-0">
+                                    {p.data.timeCommitment}
+                                </span>
                             </div>
-
-                            <div class="flex gap-1 ml-4 shrink-0">
-                                {p.data.tags.slice(0, 3).map(tag => (
-                                    <span class="text-xs bg-stone-200 p-1 text-stone-600 lowercase">
-                                        {tag}
+                            <p class="text-sm text-stone-700 leading-relaxed mt-1">
+                                {p.data.summary}
+                            </p>
+                            <div class="flex gap-1.5 flex-wrap mt-2">
+                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
+                                    {p.data.impact} impact
+                                </span>
+                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
+                                    {p.data.evidenceLevel} evidence
+                                </span>
+                                <span class="text-[10px] bg-stone-100 border border-stone-200 px-1.5 py-0.5 font-mono text-stone-600">
+                                    {p.data.riskLevel} risk
+                                </span>
+                                {p.data.tags.slice(0, 2).map((tag) => (
+                                    <span class="text-[10px] bg-white border border-stone-200 px-1.5 py-0.5 font-mono text-stone-500">
+                                        #{tag}
                                     </span>
                                 ))}
                             </div>
@@ -46,11 +67,29 @@ const latestProtocols = allProtocols
                     </li>
                 ))}
             </ul>
-        </div>
+        </section>
 
-        <div>
+        <section class="mb-8">
+            <h3 class="font-bold text-pink-800 uppercase text-sm mb-2">Recently Verified</h3>
+            <ul class="list-none p-0 m-0">
+                {latestProtocols.map((p) => (
+                    <li>
+                        <a href={`/protocols/${p.id.replace(/\.md$/, '')}`} class="flex items-baseline justify-between py-1.5 no-underline group hover:bg-stone-50">
+                            <span class="text-sm text-[#0000ee] group-hover:underline truncate">
+                                {p.data.title}
+                            </span>
+                            <span class="text-stone-400 text-[10px] tabular-nums ml-4 shrink-0 font-mono">
+                                {p.data.lastUpdated.toISOString().split('T')[0]}
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <section>
             <h3 class="font-bold text-sky-800 mb-2 uppercase text-sm">Latest Products</h3>
-            <p class="text-xs text-stone-400 italic">Coming soon.</p>
-        </div>
+            <p class="text-xs text-stone-400 italic">Coming later, after the protocol archive has a stronger review standard.</p>
+        </section>
     </main>
 </BaseLayout>
